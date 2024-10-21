@@ -1,0 +1,15 @@
+class Solution:
+    def hasDuplicate(self, nums: List[int]) -> bool:
+        # Use a set to store unique values
+        unique_values = set()
+    
+        # Loop through the array
+        for num in nums:
+            # If the number is already in the set, return True (duplicate found)
+            if num in unique_values:
+                return True
+            # Otherwise, add the number to the set
+            unique_values.add(num)
+        
+        # If no duplicates found, return False
+        return False
