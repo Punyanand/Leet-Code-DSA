@@ -1,0 +1,25 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams = {}
+
+        for s in strs:
+            # Sort the string to get the anagram key
+            key = ''.join(sorted(s))
+            
+            # Group anagrams using the sorted string as a key
+            if key not in anagrams:
+                anagrams[key] = []
+            anagrams[key].append(s)
+
+        # Return the grouped anagrams as a list of lists
+        return list(anagrams.values())
+
+# Example usage:
+sol = Solution()
+input1 = ["act", "pots", "tops", "cat", "stop", "hat"]
+input2 = ["x"]
+input3 = [""]
+
+print(sol.groupAnagrams(input1))  # Output: [["act", "cat"], ["pots", "stop", "tops"], ["hat"]]
+print(sol.groupAnagrams(input2))   # Output: [["x"]]
+print(sol.groupAnagrams(input3))   # Output: [[""]]
