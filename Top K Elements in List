@@ -1,0 +1,18 @@
+
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        frequency = Counter(nums)
+        most_common = frequency.most_common(k)
+        return [item[0] for item in most_common]
+
+# Test the function
+if __name__ == "__main__":
+    solution = Solution()
+    nums1 = [1, 2, 2, 3, 3, 3]
+    k1 = 2
+    print(solution.topKFrequent(nums1, k1))  # Output: [2, 3]
+
+    nums2 = [7, 7]
+    k2 = 1
+    print(solution.topKFrequent(nums2, k2))  # Output: [7]
