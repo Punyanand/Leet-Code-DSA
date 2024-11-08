@@ -1,0 +1,27 @@
+class Solution:
+    def maxArea(self, heights: List[int]) -> int:
+        # Initialize pointers and max_area variable
+        left, right = 0, len(heights) - 1
+        max_area = 0
+
+        # Iterate until the two pointers meet
+        while left < right:
+            # Calculate the height and width of the container
+            height = min(heights[left], heights[right])
+            width = right - left
+            # Calculate the area and update max_area if it's greater
+            current_area = height * width
+            max_area = max(max_area, current_area)
+
+            # Move the pointer pointing to the shorter line inward
+            if heights[left] < heights[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return max_area
+
+# Example usage
+solution = Solution()
+height = [1, 7, 2, 5, 4, 7, 3, 6]
+print("Maximum water container area:", solution.maxArea(height))
