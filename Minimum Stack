@@ -1,0 +1,27 @@
+class MinStack:
+    def __init__(self):
+        # Initialize two stacks: one to hold the values, another to hold the minimums
+        self.stack = []
+        self.min_stack = []
+
+    def push(self, val: int) -> None:
+        # Push the value onto the main stack
+        self.stack.append(val)
+        # If min_stack is empty or val is smaller than or equal to the top of min_stack, push it onto min_stack
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
+
+    def pop(self) -> None:
+        # Pop the top value from the main stack
+        top = self.stack.pop()
+        # If the popped value is the same as the top of min_stack, pop from min_stack as well
+        if top == self.min_stack[-1]:
+            self.min_stack.pop()
+
+    def top(self) -> int:
+        # Return the top value of the main stack
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        # Return the top value of the min_stack, which is the minimum value in the main stack
+        return self.min_stack[-1]
