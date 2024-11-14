@@ -1,0 +1,25 @@
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        # List to store the valid combinations
+        result = []
+
+        # Helper function for backtracking
+        def backtrack(current_string: str, open_count: int, close_count: int):
+            # If the current string is of the length 2 * n, add it to the result list
+            if len(current_string) == 2 * n:
+                result.append(current_string)
+                return
+            
+            # If we can still add an open parenthesis, add it
+            if open_count < n:
+                backtrack(current_string + "(", open_count + 1, close_count)
+            
+            # If we can add a close parenthesis, add it
+            if close_count < open_count:
+                backtrack(current_string + ")", open_count, close_count + 1)
+
+        # Start backtracking with an empty string and counts set to zero
+        backtrack("", 0, 0)
+        
+        return result
