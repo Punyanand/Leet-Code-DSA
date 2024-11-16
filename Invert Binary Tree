@@ -1,0 +1,53 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def invertTree(self, root):  # Changed to 'invertTree'
+        if not root:
+            return None
+        # Swap the left and right children
+        root.left, root.right = root.right, root.left
+        # Recursively invert the left and right subtrees
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+
+# Helper function to build a binary tree from a list
+def build_tree(values, index=0):
+    if index >= len(values) or values[index] is None:
+        return None
+    node = TreeNode(values[index])
+    node.left = build_tree(values, 2 * index + 1)
+    node.right = build_tree(values, 2 * index + 2)
+    return node
+
+# Helper function to convert a binary tree to a list
+def tree_to_list(root):
+    if not root:
+        return []
+    result = []
+    queue = [root]
+    while queue:
+        node = queue.pop(0)
+        if node:
+            result.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+        else:
+            result.append(None)
+    # Trim trailing None values for a cleaner output
+    while result and result[-1] is None:
+        result.pop()
+    return result
+
+# Example usage
+input_tree = [1, 2, 3, 4, 5, 6, 7]
+root = build_tree(input_tree)
+solution = Solution()
+inverted_root = solution.invertTree(root)  # Method name corrected to 'invertTree'
+output_tree = tree_to_list(inverted_root)
+print("Inverted Tree:", output_tree)
