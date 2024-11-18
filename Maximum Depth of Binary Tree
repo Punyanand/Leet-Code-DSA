@@ -1,0 +1,24 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+         self.val = val
+         self.left = left
+         self.right = right
+
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        # Depth of the current node is 1 + max depth of left and right subtrees
+        left_depth = self.maxDepth(root.left)
+        right_depth = self.maxDepth(root.right)
+        return 1 + max(left_depth, right_depth)
+
+# Helper function to build a binary tree from a list
+    def build_tree(values, index=0):
+        if index >= len(values) or values[index] is None:
+           return None
+        node = TreeNode(values[index])
+        node.left = build_tree(values, 2 * index + 1)
+        node.right = build_tree(values, 2 * index + 2)
+        return node
