@@ -1,0 +1,31 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        def check(node):
+            if not node:
+                return 0  # A null tree is balanced and has height 0
+            
+            # Check the height of left and right subtrees
+            left_height = check(node.left)
+            if left_height == -1:  # Left subtree is unbalanced
+                return -1
+            
+            right_height = check(node.right)
+            if right_height == -1:  # Right subtree is unbalanced
+                return -1
+            
+            # If the current node's subtrees differ in height by more than 1, it's unbalanced
+            if abs(left_height - right_height) > 1:
+                return -1
+            
+            # Return the height of the subtree rooted at the current node
+            return max(left_height, right_height) + 1
+        
+        # Use the helper function `check` to determine balance
+        return check(root) != -1
+        
