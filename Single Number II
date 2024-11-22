@@ -1,0 +1,13 @@
+class Solution:
+    def singleNumber(self, nums):
+        ones, twos = 0, 0
+        
+        for num in nums:
+            # Update 'ones' with the bits that are set in 'num' but not in 'twos'
+            ones = (ones ^ num) & ~twos
+            
+            # Update 'twos' with the bits that are set in 'num' but not in 'ones'
+            twos = (twos ^ num) & ~ones
+        
+        # 'ones' will contain the unique element that appears once
+        return ones
