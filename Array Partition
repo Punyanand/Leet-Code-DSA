@@ -1,0 +1,8 @@
+class Solution(object):
+    def arrayPairSum(self, nums):
+        # Step 1: Sort the array
+        nums.sort()
+        
+        # Step 2: Sum every other element starting from index 0
+        return sum(nums[i] for i in range(0, len(nums), 2))
+
