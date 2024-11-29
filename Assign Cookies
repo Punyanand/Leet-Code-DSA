@@ -1,0 +1,22 @@
+class Solution(object):
+    def findContentChildren(self, g, s):
+        """
+        :type g: List[int]
+        :type s: List[int]
+        :rtype: int
+        """
+        # Sort both the greed factors and the cookie sizes
+        g.sort()
+        s.sort()
+        
+        content_children = 0
+        i, j = 0, 0  # i for children, j for cookies
+        
+        # Use a two-pointer approach
+        while i < len(g) and j < len(s):
+            if s[j] >= g[i]:  # If the cookie can satisfy the child
+                content_children += 1
+                i += 1  # Move to the next child
+            j += 1  # Move to the next cookie
+        
+        return content_children
