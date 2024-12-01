@@ -1,0 +1,26 @@
+class Solution(object):
+    def countGoodNumbers(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        MOD = 10**9 + 7
+
+        # Even digits (0, 2, 4, 6, 8)
+        num_even_digits = 5
+
+        # Prime digits (2, 3, 5, 7)
+        num_prime_digits = 4
+
+        if n == 1:
+            return num_even_digits
+
+        # Calculate the number of even and odd index positions
+        even_positions = (n + 1) // 2  # Half or more for odd-length strings
+        odd_positions = n // 2  # Half or less for odd-length strings
+
+        # Total combinations for a good digit string
+        total_combinations = (pow(num_even_digits, even_positions, MOD) * 
+                              pow(num_prime_digits, odd_positions, MOD)) % MOD
+
+        return total_combinations
